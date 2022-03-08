@@ -1,13 +1,13 @@
+/* eslint-disable no-console */
 import { useEffect } from 'react';
+import { api } from '../../services/api';
 import { Container } from './styles';
 
 export function TransactionsTable() {
   useEffect(() => {
-    fetch('http://localhost:3000/api/transactions')
-      .then(response => response.json())
-      // eslint-disable-next-line no-console
-      .then(data => console.log(data));
+    api.get('/transactions').then(response => console.log(response.data));
   }, []);
+
   return (
     <Container>
       <table>
