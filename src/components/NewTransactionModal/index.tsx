@@ -1,18 +1,18 @@
+import { useState } from 'react';
 import Modal from 'react-modal';
 import closeImg from '../../assets/close.svg';
 import icommImg from '../../assets/income.svg';
 import outcomeImg from '../../assets/outcome.svg';
-import { Container, TransactionTypeContainer } from './styles';
+import { Container, TransactionTypeContainer, RadioBox } from './styles';
 
 interface NewTrasactionModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
 }
 
-export function NewTrasactionModal({
-  isOpen,
-  onRequestClose,
-}: NewTrasactionModalProps) {
+// eslint-disable-next-line prettier/prettier
+export function NewTrasactionModal({isOpen, onRequestClose,}: NewTrasactionModalProps) {
+  const [type, setType] = useState('deposit');
   return (
     <Modal
       isOpen={isOpen}
@@ -34,15 +34,27 @@ export function NewTrasactionModal({
         <input type="number" placeholder="Valor" />
 
         <TransactionTypeContainer>
-          <button type="button">
+          <RadioBox
+            type="button"
+            onClick={() => {
+              setType('deposit');
+            }}
+            isActive={type === 'deposit'}
+          >
             <img src={icommImg} alt="Entrada" />
             <span>Entrada</span>
-          </button>
+          </RadioBox>
 
-          <button type="button">
+          <RadioBox
+            type="button"
+            onClick={() => {
+              setType('withdraw');
+            }}
+            isActive={type === 'withdraw'}
+          >
             <img src={outcomeImg} alt="Saida" />
             <span>Saida</span>
-          </button>
+          </RadioBox>
         </TransactionTypeContainer>
 
         <input placeholder="Categoria" />
