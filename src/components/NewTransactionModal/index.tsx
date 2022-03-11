@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import closeImg from '../../assets/close.svg';
 import icommImg from '../../assets/income.svg';
 import outcomeImg from '../../assets/outcome.svg';
+import { api } from '../../services/api';
 import { Container, TransactionTypeContainer, RadioBox } from './styles';
 
 interface NewTrasactionModalProps {
@@ -17,16 +18,18 @@ export function NewTrasactionModal({isOpen, onRequestClose,}: NewTrasactionModal
   const [category, setCategory] = useState('');
   const [type, setType] = useState('deposit');
 
-  function handleCreateNewTrasaction(event: FormEvent) {
+  const handleCreateNewTrasaction = (event: FormEvent) => {
     event.preventDefault();
-    // eslint-disable-next-line no-console
-    console.log({
+
+    const data = {
       title,
       value,
       category,
       type,
-    });
-  }
+    };
+
+    api.post('/trasactions', data);
+  };
 
   return (
     <Modal
@@ -42,6 +45,7 @@ export function NewTrasactionModal({isOpen, onRequestClose,}: NewTrasactionModal
       >
         <img src={closeImg} alt="Fechar Modal" />
       </button>
+
       <Container onSubmit={handleCreateNewTrasaction}>
         <h2>Cadastrar transação</h2>
         <input
