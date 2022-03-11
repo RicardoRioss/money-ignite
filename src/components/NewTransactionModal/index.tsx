@@ -18,7 +18,7 @@ export function NewTrasactionModal({isOpen, onRequestClose,}: NewTrasactionModal
   const [category, setCategory] = useState('');
   const [type, setType] = useState('deposit');
 
-  const handleCreateNewTrasaction = (event: FormEvent) => {
+  const handleCreateNewTransaction = (event: FormEvent) => {
     event.preventDefault();
 
     const data = {
@@ -28,7 +28,7 @@ export function NewTrasactionModal({isOpen, onRequestClose,}: NewTrasactionModal
       type,
     };
 
-    api.post('/trasactions', data);
+    api.post('/transactions', data);
   };
 
   return (
@@ -46,7 +46,7 @@ export function NewTrasactionModal({isOpen, onRequestClose,}: NewTrasactionModal
         <img src={closeImg} alt="Fechar Modal" />
       </button>
 
-      <Container onSubmit={handleCreateNewTrasaction}>
+      <Container onSubmit={handleCreateNewTransaction}>
         <h2>Cadastrar transação</h2>
         <input
           placeholder="Titulo"
